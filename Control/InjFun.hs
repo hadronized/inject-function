@@ -1,6 +1,7 @@
-module InjFun (
+module Control.InjFun (
     -- * Inject function
-    InjFun(cfapply)
+    InjFun
+  , cfapply
   , inject
     -- * Sequencing, exploding and merging
   , (|->)
@@ -12,9 +13,8 @@ module InjFun (
 -- `i` represents its input, `c` is the injected control parameters, `m` is the resulting monad
 -- and `o` is the output.
 newtype InjFun i c m o = InjFun {
-  cfapply :: i   -- ^ Regular parameters of the function
-          -> c   -- ^ Injected control parameters
-          -> m o -- ^ Output after injection and wrapped in a `Monad` 
+  -- |Feed a `InjFun` with its regular parameters and injected parameters.
+  cfapply :: i -> c -> m o
   }
 
 -- |Create an inject function.
